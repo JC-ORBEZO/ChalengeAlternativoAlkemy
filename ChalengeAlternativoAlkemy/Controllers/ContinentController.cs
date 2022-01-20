@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ChalengeAlternativoAlkemy.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace ChalengeAlternativoAlkemy.Controllers
@@ -19,6 +20,14 @@ namespace ChalengeAlternativoAlkemy.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            return Ok(_context.Continents.ToList());
+        }
+
+        [HttpPost]
+        public IActionResult Post(Continent continent)
+        {
+            _context.Continents.Add(continent);
+            _context.SaveChanges();
             return Ok(_context.Continents.ToList());
         }
     }

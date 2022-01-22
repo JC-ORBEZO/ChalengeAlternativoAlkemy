@@ -1,6 +1,9 @@
 ﻿using ChalengeAlternativoAlkemy.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ChalengeAlternativoAlkemy.Controllers
 {
@@ -16,19 +19,42 @@ namespace ChalengeAlternativoAlkemy.Controllers
         {
             _context = context;
         }
-        
+
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult<List<Continent>>> Get()
         {
-            return Ok(_context.Continents.ToList());
+            return await _context.Continents.ToListAsync();
         }
 
         [HttpPost]
-        public IActionResult Post(Continent continent)
+        public async Task<ActionResult> Post(Continent continent)
         {
             _context.Continents.Add(continent);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Ok(_context.Continents.ToList());
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(Continent continent,int id)
+        {
+            if (continent.Id != id) return BadRequest("El Id del continente no coincide con el Id de la URL");
+            var existe = await _context.Continents.AnyAsync(x => x.Id == id);
+            if (!existe) return NotFound();
+            _context.Continents.Update(continent);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var existe = await _context.Continents.AnyAsync(x => x.Id == id);
+            if (!existe) return NotFound();
+            _context.Continents.Remove(new Continent { Id=id});
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+        
+        
     }
 }

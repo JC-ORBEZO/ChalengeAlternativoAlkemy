@@ -11,7 +11,7 @@ namespace ChalengeAlternativoAlkemy.Models
         public int Id { get; set; }
         [Url]
         public string Imagen { get; set; }
-        [Required]
+        [Required(ErrorMessage ="El campo Denominación es requerido")]
         [MaxLength(150)]
         public string Denominacion { get; set; }
         [Column(TypeName = "Date")]

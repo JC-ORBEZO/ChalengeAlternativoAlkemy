@@ -22,7 +22,7 @@ namespace ChalengeAlternativoAlkemy.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Icon",
+                name: "Icons",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -35,11 +35,11 @@ namespace ChalengeAlternativoAlkemy.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Icon", x => x.Id);
+                    table.PrimaryKey("PK_Icons", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "City",
+                name: "Cities",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -47,14 +47,14 @@ namespace ChalengeAlternativoAlkemy.Migrations
                     Imagen = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Denominacion = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     CantidadHabitantes = table.Column<int>(type: "int", nullable: false),
-                    SuperficieTotal = table.Column<decimal>(type: "decimal(20,3)", nullable: false),
+                    SuperficieTotal = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     ContinentId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_City", x => x.Id);
+                    table.PrimaryKey("PK_Cities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_City_Continents_ContinentId",
+                        name: "FK_Cities_Continents_ContinentId",
                         column: x => x.ContinentId,
                         principalTable: "Continents",
                         principalColumn: "Id",
@@ -72,22 +72,22 @@ namespace ChalengeAlternativoAlkemy.Migrations
                 {
                     table.PrimaryKey("PK_CityIcon", x => new { x.CitiesId, x.IconsId });
                     table.ForeignKey(
-                        name: "FK_CityIcon_City_CitiesId",
+                        name: "FK_CityIcon_Cities_CitiesId",
                         column: x => x.CitiesId,
-                        principalTable: "City",
+                        principalTable: "Cities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CityIcon_Icon_IconsId",
+                        name: "FK_CityIcon_Icons_IconsId",
                         column: x => x.IconsId,
-                        principalTable: "Icon",
+                        principalTable: "Icons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_City_ContinentId",
-                table: "City",
+                name: "IX_Cities_ContinentId",
+                table: "Cities",
                 column: "ContinentId");
 
             migrationBuilder.CreateIndex(
@@ -102,10 +102,10 @@ namespace ChalengeAlternativoAlkemy.Migrations
                 name: "CityIcon");
 
             migrationBuilder.DropTable(
-                name: "City");
+                name: "Cities");
 
             migrationBuilder.DropTable(
-                name: "Icon");
+                name: "Icons");
 
             migrationBuilder.DropTable(
                 name: "Continents");

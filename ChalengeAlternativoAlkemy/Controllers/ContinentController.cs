@@ -26,8 +26,14 @@ namespace ChalengeAlternativoAlkemy.Controllers
             return await _context.Continents.ToListAsync();
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Continent>> Get([FromRoute] int id)
+        {             
+            return await _context.Continents.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         [HttpPost]
-        public async Task<ActionResult> Post(Continent continent)
+        public async Task<ActionResult> Post([FromBody] Continent continent)
         {
             _context.Continents.Add(continent);
             await _context.SaveChangesAsync();

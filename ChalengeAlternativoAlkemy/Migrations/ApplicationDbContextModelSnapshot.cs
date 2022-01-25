@@ -41,13 +41,13 @@ namespace ChalengeAlternativoAlkemy.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("SuperficieTotal")
-                        .HasColumnType("decimal(20,3)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ContinentId");
 
-                    b.ToTable("City");
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("ChalengeAlternativoAlkemy.Models.Continent", b =>
@@ -96,7 +96,7 @@ namespace ChalengeAlternativoAlkemy.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Icon");
+                    b.ToTable("Icons");
                 });
 
             modelBuilder.Entity("CityIcon", b =>

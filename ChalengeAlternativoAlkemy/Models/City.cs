@@ -10,12 +10,11 @@ namespace ChalengeAlternativoAlkemy.Models
         public int Id { get; set; }
         [Url]
         public string Imagen { get; set; }
-        [Required]
+        [Required(ErrorMessage ="El campo Denominación es requerido.")]
         [MaxLength(100)]
         public string Denominacion { get; set; }
-        [Range(0,5)]
         public int CantidadHabitantes { get; set; }
-        [Column(TypeName = "decimal(20, 3)")]
+        [Column(TypeName = "decimal(10,2)")]
         public decimal SuperficieTotal { get; set; }
         public List<Icon> Icons { get; set; }
     }
